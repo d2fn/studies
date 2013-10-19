@@ -1,7 +1,7 @@
 class Cell {
   
   float noiseScale = 0.05f;
-  float radius = 150.0f;
+  float radius = 180.0f;
   
   float x, y, w, h;
   int cellx, celly;
@@ -20,14 +20,16 @@ class Cell {
   
   void draw() {
     noStroke();
-    noiseDetail(2,0.5);
+    
     float noize = noise(cellx*noiseScale, celly*noiseScale + frame*speed);
     float clr = noize * 255;
-    fill(clr/3, clr/21, clr, 200);
+    
     float dir = -PI/4.0;
     float xshift = noize*radius*cos(dir);
     float yshift = noize*radius*sin(dir);
-    rect(x + xshift, y + yshift, w*cos(noize) + 3, h*noize);
+    
+    fill(clr/3, clr/21, clr, 200);
+    rect(x + xshift, y + yshift, w*cos(noize) + 3, h*sin(noize));
     
     frame++;
   }
