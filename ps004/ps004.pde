@@ -5,21 +5,25 @@ float lineHeight = 55.0f;
 float lines = 10f;
 
 float theta0 = 0;
-
 long frame = 0L;
 
+boolean saveFrames = false;
+
 void setup() {
-  size(600,500);//,PDF,"out.pdf");
+  size(750,600);//,PDF,"out.pdf");
   noiseDetail(0, 0.2);
   noiseSeed(0);
   stroke(40,40,40,255);
   strokeWeight(1);
+  colorMode(HSB,360);
+  background(0);
 }
 
 void draw() {
-  background(0);
-  colorMode(HSB,360);
-  stroke(frame*0.3%360,360,360,360);
+  //background(0);
+  fill(0, 0, 0, 5);
+  rect(0, 0, width, height);
+  stroke(360*theta0/TWO_PI,360,360,360);
   float arc = 2*PI;
   float rad = 40f;
   float inc = 0.01f;
@@ -39,7 +43,7 @@ void draw() {
     rad += lineHeight;
   }
   
-  stroke(100, 200, 360, 360);
+  stroke(100, 0, 100);
   float x = 0f;
   float dx = width/(arc/inc);
   for(float theta = 0; theta < arc; theta += inc) {
@@ -49,10 +53,18 @@ void draw() {
   
   theta0 += 0.001f;
   frame++;
-  //exit();  
+  
+  if(saveFrames) {
+    saveFrame("frames/frame-######.png");
+    if(theta0 >= TWO_PI) {
+      exit();
+    }
+  }  
 }
 
-float continuousNoise(float theta) {
-  return noise((1000+frame*0.001+cos(theta))*noiseScale, (1000+10*cos(theta0)+sin(theta))*noiseScale);
+float continuousNoise(float theta) { 
+  float centerX = 10f * cos(theta0);
+  float centerY = 10f * sin(theta0);
+  return noise(centerX + noiseScale * cos(theta), centerY + noiseScale * sin(theta));
 }
 
