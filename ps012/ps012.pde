@@ -11,12 +11,12 @@ float centerX = 0;
 float centerY = 0;
 float centerZ = 5;
 */
-float eyeX = 50;
+float eyeX = 130;
 float eyeY = 100;
-float eyeZ = 100;
-float centerX = 50;
-float centerY = 50;
-float centerZ = 50;
+float eyeZ = 70;
+float centerX = 10;
+float centerY = 10;
+float centerZ = 20;
 
 float upX = 0;
 float upY = 0;
@@ -72,14 +72,14 @@ void draw() {
   vertex(z, z, 150);
   vertex(z, -z, 150);
   */
-  vertex(-100, -z, z+100);
-  vertex(-100, -z, 0);
-  vertex(-100, z, 0);
-  vertex(-100, z, z+100);
+  vertex(-120, -z, z+100);
+  vertex(-120, -z, 0);
+  vertex(-120, z, 0);
+  vertex(-120, z, z+100);
   
   endShape();
   
-  jr.fill("diffuse", 100, 100, 100);
+  jr.fill("diffuse", 50, 90, 183);
   for(int y = 0; y < ycount; y++) {
     beginShape(QUADS);
     for(int x = 0; x < xcount; x++) {
