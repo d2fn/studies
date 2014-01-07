@@ -11,14 +11,16 @@ class Point {
   }
   
   boolean visible() {
-    return x + 2*girth > 0 && x - 2*girth < width &&
-           y + 2*girth > 0 && y - 2*girth < height;
+    return x + 4*girth > 0 && x - 4*girth < width &&
+           y + 4*girth > 0 && y - 4*girth < height;
   }
   
   void draw() {
-    stroke(10, 19, 86, 40);
-    strokeWeight(0.5f);
-    noFill();
-    ellipse(x, y, girth, girth);
+    if(visible()) {
+      stroke(10, 19, 86, 15);
+      strokeWeight(0.5f);
+      noFill();
+      ellipse(x, y, girth, girth);
+    }
   }
 }
