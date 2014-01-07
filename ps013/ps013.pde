@@ -2,21 +2,32 @@ import joons.JoonsRenderer;
 
 JoonsRenderer jr;
 
+int xcount = 100;
+int ycount = 50;
+
+float maxMountainHeight = 40;
+
+
 //Camera Setting.
-/*
-float eyeX = 100;
-float eyeY = 100;
+
+//*
+float eyeX = 0;
+float eyeY = 120;
 float eyeZ = 80;
 float centerX = 0;
 float centerY = 0;
-float centerZ = 5;
-*/
-float eyeX = -50;
+float centerZ = 10;
+
+//*/
+/*
+
+float eyeX = 200;
 float eyeY = 50;
-float eyeZ = 50;
-float centerX = 130;
+float eyeZ = 40;
+float centerX = 0;
 float centerY = 50;
 float centerZ = 0;
+/*/
 
 float upX = 0;
 float upY = 0;
@@ -25,11 +36,6 @@ float fov = PI / 3;
 float aspect = 4/3f;  
 float zNear = 1;
 float zFar = 10000;
-
-int xcount = 100;
-int ycount = 50;
-
-float maxMountainHeight = 60;
 
 int bgcolor = color(221, 218, 206);
 
@@ -40,7 +46,7 @@ void setup() {
   jr.setSizeMultiplier(1);
   jr.setAA(0, 2, 4); //setAA(minAA, maxAA, AASamples), increase AASamples to increase blur fidelity.
   jr.setCaustics(20);
-  jr.setDOF(130, 1); //setDOF(focusDepth, lensRadius), bigger the lens radius, the blurrier the unfocused objects.
+  jr.setDOF(100, 1); //setDOF(focusDepth, lensRadius), bigger the lens radius, the blurrier the unfocused objects.
   noiseDetail(3, 0.5);
   randomSeed(0);
   noiseSeed(0);
@@ -64,18 +70,20 @@ void draw() {
   
   //Lighting.
   jr.fill("light", 30, 30, 30, 64);
-  int z = 50;
+  int z = 120;
   beginShape(QUADS);
-  /*
+  
+  z = 50;
   vertex(-z, -z, 150);
   vertex(-z, z, 150);
   vertex(z, z, 150);
   vertex(z, -z, 150);
-  */
-  vertex(-120, -z, z+100);
-  vertex(-120, -z, 0);
+  /*
+  vertex(-120, 0, z+100);
+  vertex(-120, 0, 0);
   vertex(-120, z, 0);
   vertex(-120, z, z+100);
+  */
   
   endShape();
   
@@ -92,8 +100,9 @@ void draw() {
       float yratio = (float)y/(float)ycount;
       float xratio = (float)x/(float)xcount;
       //float boxZ = map(noise(0.1*x2, 0.1*y1),  0, 1, 0, xratio*maxMountainHeight);
-      float boxZ = sin(1.3*sqrt(x*x+y*y));
-      box(2, 2, boxZ);
+      float dist = sqrt(x1*x1 + y1*y1);
+      float boxZ = xratio * maxMountainHeight * (sin(dist/10));
+      box(1, 1, boxZ);
       popMatrix();
 //      vertex(x, y, sin(1.3*sqrt(x*x+y*y)));
 //      vertex(x, y+1, sin(1.0*sqrt(x*x+(y+1)*(y+1))));
