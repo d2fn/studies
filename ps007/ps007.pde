@@ -1,9 +1,9 @@
 import processing.pdf.PGraphicsPDF;
 
-float noiseScale = 0.7f;
-float lineHeight = 130.0f;
-float r0 = 60;
-float lines = 2f;
+float noiseScale = 2f;
+float lineHeight = 65.0f;
+float r0 = 80f;
+float lines = 1f;
 
 float theta0 = -PI/4f;
 long frame = 0L;
@@ -14,7 +14,7 @@ int w = 600;
 
 void setup() {
   size((int)(1.6*w), w);//,PDF,"out.pdf");
-  noiseDetail(0, 0.2);
+  noiseDetail(0, 1);
   noiseSeed(8);
   stroke(40, 40, 40, 255);
   strokeWeight(2);
@@ -32,7 +32,7 @@ void draw() {
   rect(0, 0, width, height);
   //colorMode(HSB, 360);
   //stroke((360*theta0*4f/TWO_PI)%360, 360/*theta0*6/TWO_PI*/, 360, 10);
-  stroke(0, 47, 183, 30);
+  stroke(0, 47, 183, 10);
   float arc = TWO_PI;
   float rad = r0;
   float inc = 0.01f;
